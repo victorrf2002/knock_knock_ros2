@@ -18,12 +18,12 @@ find_package(rclpy REQUIRED)
 include_directories(include)
 
 # Create C++ executable
-add_executable(cpp_executable src/cpp_node.cpp)
-ament_target_dependencies(cpp_executable rclcpp)
+add_executable(publisher src/knock_cpp_pub.cpp)
+ament_target_dependencies(publisher rclcpp)
 
 # Install C++ executables
-install(TARGET
-  cpp_executable
+install(TARGETS
+  publisher
   DESTINATION lib/${PROJECT_NAME}
 )
 
