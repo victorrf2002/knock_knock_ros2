@@ -7,8 +7,33 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rclpy REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+
+# Include C++ "include" directory
+include_directories(include)
+
+# Create C++ executable
+add_executable(cpp_executable src/cpp_node.cpp)
+ament_target_dependencies(cpp_executable rclcpp)
+
+# Install C++ executables
+install(TARGET
+  cpp_executable
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+# Install Python modules
+ament_python_install_package(${PROJECT_NAME})
+
+# Install Python executables
+install(PROGRAMS
+  scripts/py_node.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_package()
